@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#070b14" name="theme-color"/>
+<title>NAVVV</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&amp;family=Rajdhani:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+ background:radial-gradient(ellipse at top,#102a44 0%,transparent 45%),#070b14;
+ color:white;
+ font-family:'Rajdhani',sans-serif;
+ min-height:100vh;
+}
+
+.app{
+ max-width:720px;
+ margin:auto;
+ padding:22px 15px 35px;
+ display:none;
+}
+.app.unlocked{display:block}
+
+/* SCREENS CONTAINER */
+.screen{
+ min-height:100vh;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ padding:20px;
+}
+.screen.hidden{display:none !important;}
+
+.login-card{
+ width:100%;
+ max-width:410px;
+ padding:32px 24px;
+ text-align:center;
+ background:linear-gradient(145deg,#131e2d,#0b131e);
+ border:1px solid #00b4d8;
+ border-radius:20px;
+ box-shadow:0 0 35px #00b4d825;
+ position:relative;
+}
+
+.login-logo{
+ font-family:'Orbitron',sans-serif;
+ font-size:29px;
+ font-weight:900;
+ letter-spacing:4px;
+}
+.login-logo span,.brand span{color:#00b4d8}
+
+.login-subtitle{
+ margin-top:12px;
+ color:#90e0ef;
+ font-family:'Orbitron',sans-serif;
+ font-size:10px;
+ letter-spacing:3px;
+}
+
+.login-line{
+ width:65px;
+ height:3px;
+ margin:22px auto;
+ border-radius:10px;
+ background:linear-gradient(90deg,#0077b6,#00b4d8);
+}
+
+.login-title{
+ font-family:'Orbitron',sans-serif;
+ font-size:14px;
+ letter-spacing:2px;
+ margin-bottom:10px;
+}
+
+.login-description{
+ color:#94a3b8;
+ font-size:15px;
+ margin-bottom:20px;
+}
+
+.key-input{
+ width:100%;
+ padding:15px;
+ margin-bottom:12px;
+ border-radius:10px;
+ border:1px solid #1d3557;
+ outline:none;
+ background:#070b14;
+ color:white;
+ text-align:center;
+ font-family:'Orbitron',sans-serif;
+ font-size:15px;
+ letter-spacing:2px;
+}
+
+.key-input:focus{
+ border-color:#00b4d8;
+ box-shadow:0 0 15px #00b4d833;
+}
+
+.unlock-btn,.copy,.download,.action-btn,.admin-portal-btn{
+ background:linear-gradient(110deg,#0077b6,#00b4d8);
+ color:white;
+ font-family:'Orbitron',sans-serif;
+ font-weight:800;
+ cursor:pointer;
+ border:0;
+ border-radius:10px;
+ transition:.2s;
+}
+
+.unlock-btn{
+ width:100%;
+ margin-top:6px;
+ padding:16px;
+ font-size:12px;
+ letter-spacing:2px;
+}
+
+.admin-portal-btn{
+ display:block;
+ width:100%;
+ margin-bottom:20px;
+ padding:12px;
+ font-size:10px;
+ letter-spacing:2px;
+ background:linear-gradient(110deg,#1d3557,#1e3a8a);
+ border:1px solid #00b4d8;
+}
+
+.back-btn{
+ background:transparent;
+ border:none;
+ color:#90e0ef;
+ font-family:'Orbitron',sans-serif;
+ font-size:10px;
+ cursor:pointer;
+ margin-top:15px;
+ text-decoration:underline;
+ letter-spacing:1px;
+}
+
+.unlock-btn:active,.copy:active,.action-btn:active{transform:scale(.98)}
+
+.login-error{
+ min-height:20px;
+ margin-top:14px;
+ color:#ff4d6d;
+ font-family:'Orbitron',sans-serif;
+ font-size:10px;
+ letter-spacing:1px;
+}
+
+.login-footer{
+ margin-top:22px;
+ color:#64748b;
+ font-family:'Orbitron',sans-serif;
+ font-size:9px;
+ letter-spacing:2px;
+}
+
+header{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding:22px 8px;
+ border-bottom:1px solid #1e293b;
+}
+
+.brand{
+ font-family:'Orbitron',sans-serif;
+ font-size:26px;
+ font-weight:900;
+ letter-spacing:4px;
+}
+
+.status{
+ margin-top:8px;
+ font-family:'Orbitron',sans-serif;
+ font-size:10px;
+ letter-spacing:3px;
+ color:#90e0ef;
+}
+
+.logout-btn{
+ padding:10px 14px;
+ background:#131e2d;
+ border:1px solid #1d3557;
+ border-radius:8px;
+ color:#ff4d6d;
+ font-family:'Orbitron',sans-serif;
+ font-size:10px;
+ cursor:pointer;
+}
+
+.copy{
+ width:100%;
+ margin:22px 0 12px;
+ padding:18px;
+ border:1px solid #00b4d8;
+ border-radius:12px;
+ font-size:12px;
+ letter-spacing:2px;
+}
+
+.tabs{
+ display:flex;
+ gap:9px;
+ padding:7px;
+ margin:22px 0;
+ background:#0b131e;
+ border:1px solid #1e293b;
+ border-radius:13px;
+}
+
+.tab{
+ flex:1;
+ padding:15px 5px;
+ border:0;
+ border-radius:9px;
+ background:transparent;
+ color:#94a3b8;
+ font-family:'Orbitron',sans-serif;
+ font-size:11px;
+ font-weight:700;
+ letter-spacing:1px;
+ cursor:pointer;
+}
+
+.tab.active{
+ background:linear-gradient(110deg,#0077b6,#00b4d8);
+ color:white;
+ box-shadow:0 0 18px #00b4d844;
+}
+
+.section{display:none}
+.section.active{display:block}
+
+.grid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:12px;
+}
+
+.tile{
+ min-height:150px;
+ padding:19px;
+ display:flex;
+ flex-direction:column;
+ justify-content:space-between;
+ background:linear-gradient(145deg,#131e2d,#0b131e);
+ border:1px solid #1d3557;
+ border-radius:14px;
+ box-shadow:0 0 15px #0077b612;
+ transition:.2s;
+}
+
+.tile:hover{border-color:#00b4d8}
+
+.name{
+ font-family:'Orbitron',sans-serif;
+ font-size:12px;
+ font-weight:700;
+ line-height:1.8;
+ letter-spacing:1px;
+}
+
+.toggleline{
+ display:flex;
+ align-items:center;
+ gap:12px;
+ color:#90e0ef;
+ font-family:'Orbitron',sans-serif;
+ font-size:10px;
+ letter-spacing:2px;
+}
+
+.switch{
+ appearance:none;
+ width:45px;
+ height:24px;
+ border-radius:20px;
+ background:#1e293b;
+ position:relative;
+ cursor:pointer;
+ transition:.2s;
+ flex-shrink:0;
+}
+
+.switch:before{
+ content:"";
+ position:absolute;
+ width:16px;
+ height:16px;
+ left:4px;
+ top:4px;
+ border-radius:50%;
+ background:#aaa;
+ transition:.2s;
+}
+
+.switch:checked{
+ background:linear-gradient(90deg,#0077b6,#00b4d8);
+}
+
+.switch:checked:before{
+ left:25px;
+ background:white;
+}
+
+/* HEADSHOT RATE */
+.headshot-control{
+ margin-top:18px;
+ padding-top:14px;
+ border-top:1px solid #1d3557;
+}
+
+.headshot-heading{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:5px;
+ color:#90e0ef;
+ font-family:'Orbitron',sans-serif;
+ font-size:9px;
+ letter-spacing:1px;
+}
+
+#headshotValue{
+ color:#00b4d8;
+ font-size:13px;
+ font-weight:900;
+}
+
+.headshot-slider{
+ appearance:none;
+ width:100%;
+ height:5px;
+ margin-top:20px;
+ border-radius:10px;
+ background:#1d3557;
+ outline:none;
+ cursor:pointer;
+}
+
+.headshot-slider::-webkit-slider-thumb{
+ appearance:none;
+ width:17px;
+ height:17px;
+ border-radius:50%;
+ background:#00b4d8;
+ border:2px solid white;
+ box-shadow:0 0 10px #00b4d8;
+}
+
+.headshot-warning{
+ display:none;
+ margin-top:14px;
+ padding:11px;
+ border-radius:8px;
+ background:#3b0764;
+ border:1px solid #ff4d6d;
+ color:#ff758f;
+ font-family:'Orbitron',sans-serif;
+ font-size:9px;
+ line-height:1.8;
+ text-align:center;
+}
+
+.headshot-warning.show{display:block}
+
+.settings-card,.admin-card{
+ padding:22px;
+ margin-bottom:16px;
+ background:linear-gradient(145deg,#131e2d,#0b131e);
+ border:1px solid #1d3557;
+ border-radius:14px;
+}
+
+.download{
+ display:block;
+ text-align:center;
+ text-decoration:none;
+ margin-top:20px;
+ padding:18px;
+ font-size:11px;
+ letter-spacing:2px;
+}
+
+.description{
+ color:#94a3b8;
+ font-size:15px;
+ margin-top:12px;
+}
+
+/* ADMIN PANEL STYLES */
+.admin-header-title{
+ font-family:'Orbitron',sans-serif;
+ font-size:16px;
+ color:#00b4d8;
+ margin-bottom:6px;
+ letter-spacing:2px;
+}
+
+.admin-row{
+ display:flex;
+ gap:10px;
+ margin-top:14px;
+ flex-wrap:wrap;
+}
+
+.admin-input{
+ flex:1;
+ min-width:140px;
+ padding:13px;
+ border-radius:9px;
+ border:1px solid #1d3557;
+ background:#070b14;
+ color:white;
+ font-family:'Orbitron',sans-serif;
+ font-size:12px;
+ outline:none;
+}
+
+.admin-input:focus{border-color:#00b4d8}
+
+.action-btn{
+ padding:13px 18px;
+ font-size:11px;
+ letter-spacing:1px;
+}
+
+.list-box{
+ margin-top:15px;
+ max-height:220px;
+ overflow-y:auto;
+ border:1px solid #1e293b;
+ border-radius:10px;
+ background:#070b14;
+ padding:8px;
+}
+
+.list-item{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding:10px 12px;
+ border-bottom:1px solid #111827;
+ font-family:'Orbitron',sans-serif;
+ font-size:11px;
+}
+
+.list-item:last-child{border-bottom:none}
+
+.item-actions{display:flex;gap:8px}
+
+.mini-btn{
+ padding:6px 10px;
+ border-radius:6px;
+ border:1px solid #1d3557;
+ background:#131e2d;
+ color:#90e0ef;
+ font-family:'Orbitron',sans-serif;
+ font-size:9px;
+ cursor:pointer;
+}
+
+.mini-btn.del{
+ border-color:#ff4d6d;
+ color:#ff4d6d;
+}
+
+.footer{
+ text-align:center;
+ margin-top:30px;
+ color:#64748b;
+ font-family:'Orbitron',sans-serif;
+ font-size:9px;
+ letter-spacing:2px;
+}
+
+.toast{
+ position:fixed;
+ bottom:25px;
+ left:50%;
+ transform:translate(-50%,20px);
+ opacity:0;
+ background:#0b131e;
+ border:1px solid #00b4d8;
+ padding:13px 20px;
+ border-radius:10px;
+ font-family:'Orbitron',sans-serif;
+ font-size:10px;
+ transition:.2s;
+ pointer-events:none;
+ z-index:100;
+ text-align:center;
+}
+
+.toast.show{
+ opacity:1;
+ transform:translate(-50%,0);
+}
+
+@media(max-width:450px){
+ .brand{font-size:21px}
+ .grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- 1. USER LOGIN SCREEN -->
+<div class="screen" id="userLoginScreen">
+<div class="login-card">
+<button class="admin-portal-btn" id="goToAdminPortalBtn" type="button">Admin / Reseller</button>
+<div class="login-logo">
+   NAV<span>VV</span>
+</div>
+<div class="login-subtitle">
+   PREMIUM ACCESS SYSTEM
+</div>
+<div class="login-line"></div>
+<div class="login-title">ENTER ACTIVATION KEY</div>
+<p class="login-description">
+   Enter your NAV-###-####-### key to unlock.
+</p>
+<input autocomplete="off" class="key-input" id="keyInput" placeholder="NAV-###-####-###" type="text"/>
+<button class="unlock-btn" id="unlockBtn" type="button">
+   UNLOCK NAVVV
+</button>
+<div class="login-error" id="loginError"></div>
+<div class="login-footer">
+   NAVVV SECURITY SYSTEM
+</div>
+</div>
+</div>
+
+<!-- 2. ADMIN / RESELLER LOGIN SCREEN -->
+<div class="screen hidden" id="adminLoginScreen">
+<div class="login-card" style="border-color:#0077b6;">
+<div class="login-logo">
+   NAV<span>VV</span>
+</div>
+<div class="login-subtitle">
+   ADMIN / RESELLER PORTAL
+</div>
+<div class="login-line"></div>
+<div class="login-title">Admin / Reseller Login</div>
+<p class="login-description">
+   Enter your staff credentials.
+</p>
+<input autocomplete="off" class="key-input" id="staffUser" placeholder="Username / Admin Key" type="text"/>
+<input autocomplete="off" class="key-input" id="staffPass" placeholder="Password" type="password"/>
+<button class="unlock-btn" id="staffLoginBtn" type="button">
+   LOGIN AS STAFF
+</button>
+<div class="login-error" id="staffLoginError"></div>
+<button class="back-btn" id="backToUserLoginBtn" type="button">← Back to User Login</button>
+</div>
+</div>
+
+<!-- 3. MAIN APP -->
+<div class="app" id="mainApp">
+<header>
+<div>
+<div class="brand">NAV<span>VV</span></div>
+<div class="status" id="roleStatus">CONNECTED - USER</div>
+</div>
+<button class="logout-btn" id="logoutBtn" type="button">LOGOUT</button>
+</header>
+
+<button class="copy" id="copyConfig" type="button">
+ COPY CONFIG
+</button>
+
+<nav class="tabs">
+<button class="tab active" data-tab="features" type="button">FEATURES</button>
+<button class="tab" data-tab="settings" type="button">SETTINGS</button>
+<button class="tab" data-tab="admin" id="adminTabBtn" style="display:none; border:1px solid #00b4d8; background:#0b131e;" type="button">CONTROL PANEL</button>
+</nav>
+
+<!-- FEATURES -->
+<section class="section active" id="features">
+<div class="grid">
+<div class="tile">
+<div class="name">AIMBOT</div>
+<div class="toggleline">
+<input class="switch" type="checkbox"/>
+<span>OFF</span>
+</div>
+<div class="headshot-control">
+<div class="headshot-heading">
+<span>HEADSHOT RATE</span>
+<span id="headshotValue">0%</span>
+</div>
+<input class="headshot-slider" id="headshotSlider" max="100" min="0" type="range" value="0"/>
+<div class="headshot-warning" id="headshotWarning">
+    70 percent or more can be banned or blacklisted
+</div>
+</div>
+</div>
+
+<div class="tile">
+<div class="name">ESP MOCO (BLACK LIST)</div>
+<div class="toggleline">
+<input class="switch" type="checkbox"/>
+<span>OFF</span>
+</div>
+</div>
+
+<div class="tile">
+<div class="name">FAST MEDKIT</div>
+<div class="toggleline">
+<input class="switch" type="checkbox"/>
+<span>OFF</span>
+</div>
+</div>
+
+<div class="tile">
+<div class="name">FAST REVIVE</div>
+<div class="toggleline">
+<input class="switch" type="checkbox"/>
+<span>OFF</span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- SETTINGS -->
+<section class="section" id="settings">
+<div class="settings-card">
+<div class="name">HAPP PROXY</div>
+<p class="description">
+   Download Happ Android Application.
+</p>
+<a class="download" href="https://github.com/Happ-proxy/happ-android/releases/latest/download/Happ.apk" rel="noopener noreferrer" target="_blank">
+   HAPP DOWNLOAD
+</a>
+</div>
+</section>
+
+<!-- ACCESS ADMIN & RESELLER PANEL -->
+<section class="section" id="admin">
+  <div class="admin-card" style="border: 1px solid #00b4d8; box-shadow: 0 0 20px #00b4d820;">
+    <div class="admin-header-title">🛡️ ADMIN &amp; RESELLER CONTROL CENTER</div>
+    <p class="description" style="margin-bottom:15px; font-size:13px;">Manage activation keys, monitor generated access codes, and control permissions.</p>
+  </div>
+
+  <!-- CODE GENERATOR -->
+  <div class="admin-card">
+    <div class="name">GENERATE ACTIVATION KEYS (NAV-###-####-###)</div>
+    <div class="admin-row">
+      <input class="admin-input" id="genCount" max="50" min="1" placeholder="Count (e.g. 5)" type="number" value="1"/>
+      <button class="action-btn" id="generateKeysBtn" type="button">GENERATE CODES</button>
+      <button class="action-btn" id="copyAllKeysBtn" style="background:#0b131e;border:1px solid #00b4d8;" type="button">COPY ALL</button>
+    </div>
+  </div>
+
+  <!-- MANAGE CODES -->
+  <div class="admin-card">
+    <div class="name" style="display:flex;justify-content:space-between;">
+      <span>MANAGE KEYS</span>
+      <span id="keysCountBadge" style="color:#00b4d8;">0 KEYS</span>
+    </div>
+    <div class="list-box" id="keysListBox"></div>
+  </div>
+
+  <!-- ADD RESELLERS (ADMIN ONLY) -->
+  <div class="admin-card" id="resellerManagementCard">
+    <div class="name">ADD &amp; MANAGE RESELLERS</div>
+    <div class="admin-row">
+      <input class="admin-input" id="resellerUser" placeholder="Reseller Username" type="text"/>
+      <input class="admin-input" id="resellerPass" placeholder="Reseller Password" type="text"/>
+      <button class="action-btn" id="addResellerBtn" type="button">ADD RESELLER</button>
+    </div>
+    <div class="list-box" id="resellersListBox"></div>
+  </div>
+</section>
+
+<div class="footer">
+ NAVVV - PREMIUM EDITION
+</div>
+</div>
+
+<div class="toast" id="toast">COPIED</div>
+
+<script>
+/* ADMIN ACCOUNT */
+const ADMIN_ACCOUNT = {
+  username: 'NAV-000-0000-000',
+  password: 'NAVVV@123#'
+};
+
+/* INITIAL STORAGE SETUP */
+function getStoredKeys(){
+  const raw = localStorage.getItem('navvv_keys');
+  if(!raw){
+    const initial = ['NAV-104-8392-519', 'NAV-772-4910-834', 'NAV-539-1204-661'];
+    localStorage.setItem('navvv_keys', JSON.stringify(initial));
+    return initial;
+  }
+  return JSON.parse(raw);
+}
+
+function saveStoredKeys(keys){
+  localStorage.setItem('navvv_keys', JSON.stringify(keys));
+}
+
+function getResellers(){
+  const raw = localStorage.getItem('navvv_resellers');
+  return raw ? JSON.parse(raw) : [];
+}
+
+function saveResellers(list){
+  localStorage.setItem('navvv_resellers', JSON.stringify(list));
+}
+
+/* RANDOM KEY GENERATOR: NAV-###-####-### */
+function randDigits(len){
+  let s = '';
+  for(let i = 0; i < len; i++){
+    s += Math.floor(Math.random() * 10);
+  }
+  return s;
+}
+
+function createRandomNavKey(){
+  return `NAV-${randDigits(3)}-${randDigits(4)}-${randDigits(3)}`;
+}
+
+/* ELEMENTS */
+const userLoginScreen = document.getElementById('userLoginScreen');
+const adminLoginScreen = document.getElementById('adminLoginScreen');
+const mainApp = document.getElementById('mainApp');
+
+const keyInput = document.getElementById('keyInput');
+const loginError = document.getElementById('loginError');
+
+const staffUser = document.getElementById('staffUser');
+const staffPass = document.getElementById('staffPass');
+const staffLoginError = document.getElementById('staffLoginError');
+
+const adminTabBtn = document.getElementById('adminTabBtn');
+const roleStatus = document.getElementById('roleStatus');
+const resellerManagementCard = document.getElementById('resellerManagementCard');
+
+/* NAVIGATION BETWEEN SCREENS */
+document.getElementById('goToAdminPortalBtn').onclick = () => {
+  userLoginScreen.classList.add('hidden');
+  adminLoginScreen.classList.remove('hidden');
+  staffLoginError.textContent = '';
+  staffUser.value = '';
+  staffPass.value = '';
+};
+
+document.getElementById('backToUserLoginBtn').onclick = () => {
+  adminLoginScreen.classList.add('hidden');
+  userLoginScreen.classList.remove('hidden');
+  loginError.textContent = '';
+  keyInput.value = '';
+};
+
+/* APPLY SESSION & UI */
+function applyRoleUI(role, userLabel){
+  userLoginScreen.classList.add('hidden');
+  adminLoginScreen.classList.add('hidden');
+  mainApp.classList.add('unlocked');
+
+  if(role === 'admin'){
+    adminTabBtn.style.display = 'block';
+    resellerManagementCard.style.display = 'block';
+    roleStatus.textContent = 'CONNECTED - ADMIN';
+  } else if(role === 'reseller'){
+    adminTabBtn.style.display = 'block';
+    resellerManagementCard.style.display = 'none';
+    roleStatus.textContent = `CONNECTED - RESELLER (${userLabel})`;
+  } else {
+    adminTabBtn.style.display = 'none';
+    roleStatus.textContent = 'CONNECTED - USER';
+  }
+  renderAdminLists();
+}
+
+/* USER LOGIN */
+function unlockUser(){
+  const code = keyInput.value.trim().toUpperCase();
+  if(!code){
+    loginError.textContent = 'ENTER YOUR ACTIVATION KEY';
+    return;
+  }
+  const keys = getStoredKeys();
+  if(keys.includes(code)){
+    localStorage.setItem('navvv_session', JSON.stringify({role: 'user', user: code}));
+    loginError.textContent = '';
+    applyRoleUI('user', code);
+    showToast('ACCESS GRANTED');
+  } else {
+    loginError.textContent = 'INVALID ACTIVATION KEY';
+  }
+}
+
+document.getElementById('unlockBtn').onclick = unlockUser;
+keyInput.addEventListener('keydown', e => { if(e.key === 'Enter') unlockUser(); });
+
+/* STAFF LOGIN (ADMIN OR RESELLER) */
+function unlockStaff(){
+  const u = staffUser.value.trim();
+  const p = staffPass.value.trim();
+
+  if(!u || !p){
+    staffLoginError.textContent = 'ENTER USERNAME & PASSWORD';
+    return;
+  }
+
+  // Check Admin
+  if(u.toLowerCase() === ADMIN_ACCOUNT.username.toLowerCase() && p === ADMIN_ACCOUNT.password){
+    localStorage.setItem('navvv_session', JSON.stringify({role: 'admin', user: 'ADMIN'}));
+    staffLoginError.textContent = '';
+    applyRoleUI('admin', 'ADMIN');
+    showToast('ADMIN ACCESS GRANTED');
+    return;
+  }
+
+  // Check Resellers
+  const resellers = getResellers();
+  const found = resellers.find(r => r.username.toLowerCase() === u.toLowerCase() && r.password === p);
+  if(found){
+    localStorage.setItem('navvv_session', JSON.stringify({role: 'reseller', user: found.username}));
+    staffLoginError.textContent = '';
+    applyRoleUI('reseller', found.username);
+    showToast('RESELLER ACCESS GRANTED');
+    return;
+  }
+
+  staffLoginError.textContent = 'INVALID CREDENTIALS';
+}
+
+document.getElementById('staffLoginBtn').onclick = unlockStaff;
+[staffUser, staffPass].forEach(inp => {
+  inp.addEventListener('keydown', e => { if(e.key === 'Enter') unlockStaff(); });
+});
+
+/* LOGOUT */
+document.getElementById('logoutBtn').onclick = () => {
+  localStorage.removeItem('navvv_session');
+  mainApp.classList.remove('unlocked');
+  userLoginScreen.classList.remove('hidden');
+  adminLoginScreen.classList.add('hidden');
+  keyInput.value = '';
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === 'features'));
+  document.querySelectorAll('.section').forEach(s => s.classList.toggle('active', s.id === 'features'));
+};
+
+/* RESTORE SESSION */
+const savedSession = localStorage.getItem('navvv_session');
+if(savedSession){
+  try {
+    const parsed = JSON.parse(savedSession);
+    applyRoleUI(parsed.role, parsed.user);
+  } catch(e) {
+    localStorage.removeItem('navvv_session');
+  }
+}
+
+/* TABS */
+const tabs = document.querySelectorAll('.tab');
+tabs.forEach(btn => {
+  btn.onclick = () => {
+    tabs.forEach(t => t.classList.toggle('active', t === btn));
+    document.querySelectorAll('.section').forEach(s => s.classList.toggle('active', s.id === btn.dataset.tab));
+  };
+});
+
+/* SWITCHES */
+document.querySelectorAll('.switch').forEach(sw => {
+  const label = sw.parentElement.querySelector('span');
+  const update = () => { label.textContent = sw.checked ? 'ON' : 'OFF'; };
+  sw.addEventListener('change', update);
+  update();
+});
+
+/* HEADSHOT RATE */
+const headshotSlider = document.getElementById('headshotSlider');
+const headshotValue = document.getElementById('headshotValue');
+const headshotWarning = document.getElementById('headshotWarning');
+
+headshotSlider.addEventListener('input', () => {
+  const value = Number(headshotSlider.value);
+  headshotValue.textContent = value + '%';
+  headshotWarning.classList.toggle('show', value > 70);
+});
+
+/* ADMIN PANEL LOGIC */
+function renderAdminLists(){
+  const keys = getStoredKeys();
+  const keysListBox = document.getElementById('keysListBox');
+  const keysCountBadge = document.getElementById('keysCountBadge');
+  keysCountBadge.textContent = `${keys.length} KEYS`;
+
+  keysListBox.innerHTML = keys.length ? keys.map((k, idx) => `
+    <div class="list-item">
+      <span>${k}</span>
+      <div class="item-actions">
+        <button class="mini-btn" onclick="copyText('${k}')" type="button">COPY</button>
+        <button class="mini-btn del" onclick="deleteKey(${idx})" type="button">DELETE</button>
+      </div>
+    </div>
+  `).join('') : '<div style="padding:12px;color:#64748b;text-align:center;font-size:11px;">NO KEYS GENERATED YET</div>';
+
+  const resellers = getResellers();
+  const resellersListBox = document.getElementById('resellersListBox');
+  resellersListBox.innerHTML = resellers.length ? resellers.map((r, idx) => `
+    <div class="list-item">
+      <span>${r.username} | PASS: ${r.password}</span>
+      <div class="item-actions">
+        <button class="mini-btn del" onclick="deleteReseller(${idx})" type="button">REMOVE</button>
+      </div>
+    </div>
+  `).join('') : '<div style="padding:12px;color:#64748b;text-align:center;font-size:11px;">NO RESELLERS ADDED</div>';
+}
+
+document.getElementById('generateKeysBtn').onclick = () => {
+  const count = Math.min(50, Math.max(1, Number(document.getElementById('genCount').value) || 1));
+  const keys = getStoredKeys();
+  const newlyGenerated = [];
+
+  for(let i = 0; i < count; i++){
+    let newKey = createRandomNavKey();
+    while(keys.includes(newKey)){
+      newKey = createRandomNavKey();
+    }
+    keys.unshift(newKey);
+    newlyGenerated.push(newKey);
+  }
+
+  saveStoredKeys(keys);
+  renderAdminLists();
+  copyText(newlyGenerated.join('\n'));
+  showToast(`GENERATED & COPIED ${count} KEY(S)`);
+};
+
+document.getElementById('copyAllKeysBtn').onclick = () => {
+  const keys = getStoredKeys();
+  if(!keys.length) return showToast('NO KEYS TO COPY');
+  copyText(keys.join('\n'));
+  showToast('ALL KEYS COPIED');
+};
+
+window.deleteKey = function(index){
+  const keys = getStoredKeys();
+  keys.splice(index, 1);
+  saveStoredKeys(keys);
+  renderAdminLists();
+  showToast('KEY REMOVED');
+};
+
+document.getElementById('addResellerBtn').onclick = () => {
+  const uInput = document.getElementById('resellerUser');
+  const pInput = document.getElementById('resellerPass');
+  const username = uInput.value.trim();
+  const password = pInput.value.trim();
+
+  if(!username || !password){
+    showToast('ENTER USERNAME & PASSWORD');
+    return;
+  }
+
+  const resellers = getResellers();
+  if(resellers.some(r => r.username.toLowerCase() === username.toLowerCase())){
+    showToast('RESELLER ALREADY EXISTS');
+    return;
+  }
+
+  resellers.push({username, password});
+  saveResellers(resellers);
+  uInput.value = '';
+  pInput.value = '';
+  renderAdminLists();
+  showToast('RESELLER ADDED');
+};
+
+window.deleteReseller = function(index){
+  const resellers = getResellers();
+  resellers.splice(index, 1);
+  saveResellers(resellers);
+  renderAdminLists();
+  showToast('RESELLER REMOVED');
+};
+
+/* COPY CONFIG */
+document.getElementById('copyConfig').onclick = () => {
+  const config = `happ://crypt5/fzvd6FshKegBAZ0OHwjznxRD13ayHa6O22n322NHX4dRWoaQV/hkyRJeSQ5eTYoQIvkXT6C9iqIKsfdHkWIHy2UlXccd+3pSne24fs7lmlrh/LKiLmzZshRjqUUQip2hIIaS7uurF1RbRddERy+93y6IDSPElLcCrA6iDC==gBuA3MJGyNTbfbvOhXSUWmfICAr3wzilggWZ66Ub/apRxlTjqszlz1sKPiSh91sPRPtGAaELtfuu0seKumIp1/hgvkt2klx3FGCjkt7qQw/2PhcQzxClif+XkSiY+BH9Vukcw3fB1yaH94ql/oTx+Lfa175GBDOXSkxRH7jC8baP524bTjO1XMHo9cYDCF8yMBob2u3bQhRCh6fOzouqFWt6PVg3ciZSqc9/qgBrkiiId7u1kTVvudpQCFJrjrtSHoxQeSt3UlpFGcZzKpy7hRuWLq/VyyO6qoyY5kcnAtJ7eBcfyx9/zoDuR4LYsbQ8XiRZOjg4jFPdBtsHTKah6C+3riQ3dvWqLFaMsxYRm6qw+t2IhiDSCvNHsEgSdOiPa1ZYadv0OyXQtWfC0ssOu0Ik1IYiMWZl2liAyHZ9Yx2jMRpW4s94gZXi3OrQHEUrG+NFrd7zKIFpeqZUOhp065Svl7OcVruIdsRqz/Atlw3nQvzy12IB2xTltS6ybb3qCwADzNNHGu219GQP9oaHkfvxlRDS+z/bRdunyf0/+BxghXu9eGZNqySPmgru9VsYDN3Z/MGghI0YlXJOHGGcRnC9vMrZ2rkfpr8Kj3qOVN9XBCvLuc2yal6A3fsZXK9XnU7OW3pIqEWK6mfBwN9H22XoQWMZEwxwtZd0Sji9fog=`;
+  copyText(config);
+  showToast('CONFIG COPIED');
+};
+
+async function copyText(text){
+  try{
+    await navigator.clipboard.writeText(text);
+  }catch(e){
+    const input = document.createElement('textarea');
+    input.value = text;
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand('copy');
+    input.remove();
+  }
+}
+
+/* TOAST */
+function showToast(message){
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.classList.add('show');
+  setTimeout(() => { toast.classList.remove('show'); }, 2000);
+}
+</script>
+</body>
+</html>
